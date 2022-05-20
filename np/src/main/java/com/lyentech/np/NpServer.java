@@ -9,6 +9,8 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
+import com.lyentech.np.MMKVUtil.Builder;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,7 +18,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 import java.util.List;
-import com.lyentech.np.MMKVUtil.Builder;
+
 import okhttp3.Call;
 import okhttp3.Response;
 
@@ -84,7 +86,15 @@ public class NpServer {
     public static void postEvent(String dsc, String src, String tp, String ev, String evv) {
         JSONObject js = new JSONObject();
         try {
-            js.put(ev, evv);
+            if (!TextUtils.isEmpty(evv)) {
+                if (evv.contains("\":\"")) { //去除多余的反斜杠
+                    js.put(ev, new JSONObject(evv));
+                } else {
+                    js.put(ev, evv);
+                }
+            } else {
+                js.put(ev, evv);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

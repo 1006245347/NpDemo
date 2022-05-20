@@ -39,7 +39,8 @@ public class URIEncoder {
                     || chars[i] == ')' || chars[i] == ';' || chars[i] == '/' || chars[i] == '?'
                     /*|| chars[i] == ':' */ || chars[i] == '@' || chars[i] == '&' || chars[i] == '='
                     || chars[i] == '+' || chars[i] == '$' || chars[i] == ',' || chars[i] == '#'
-                    || (chars[i] <= '9' && chars[i] >= '0')) {
+                    || (chars[i] <= '9' && chars[i] >= '0')
+                    /*|| (chars[i] == '"')*/) {
                 sb.append(chars[i]);
             } else {
                 sb.append("%");
