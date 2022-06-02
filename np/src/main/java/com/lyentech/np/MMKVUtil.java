@@ -67,7 +67,7 @@ public class MMKVUtil {
             MMKV.initialize(NpServer.getNpContext());
             kv = MMKV.defaultMMKV();
         } else {
-            MMKV.initialize(savePath);
+            MMKV.initialize(NpServer.getNpContext(),savePath);
             kv = MMKV.mmkvWithID(savePath);
         }
     }
